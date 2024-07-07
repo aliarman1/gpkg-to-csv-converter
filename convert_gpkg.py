@@ -34,20 +34,7 @@ def convert_gpkg_to_csv(src_directory, dest_directory):
         except Exception as e:
             print(f"Error converting {gpkg_path}: {e}")
 
-# List of directories to search for .gpkg files
-directories = [
-    'citycorporation',
-    'district',
-    'division',
-    'enumerationarea',
-    'mauza',
-    'municipality',
-    'union',
-    'upazila',
-    'village'
-]
-
-# Base path where these directories are located (current working directory)
+# Base path is the current working directory
 base_path = os.getcwd()
 
 # Destination directory (output directory within the current working directory)
@@ -56,11 +43,5 @@ dest_directory = os.path.join(base_path, 'output')
 print(f"Base path: {base_path}")
 print(f"Destination path: {dest_directory}")
 
-# Convert .gpkg files in each directory
-for dir_name in directories:
-    full_path = os.path.join(base_path, dir_name)
-    if os.path.isdir(full_path):
-        print(f"Processing directory: {full_path}")
-        convert_gpkg_to_csv(full_path, dest_directory)
-    else:
-        print(f"Directory not found: {full_path}")
+# Convert .gpkg files in the current directory and all subdirectories
+convert_gpkg_to_csv(base_path, dest_directory)
